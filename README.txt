@@ -1,1 +1,1 @@
-<a href="https://jcristia.github.io/ArianeJohnWedding/" target="_blank" />
+<a href="https://jcristia.github.io/ArianeJohnWedding/" target="_blank">Ariane and John's wedding</a>
