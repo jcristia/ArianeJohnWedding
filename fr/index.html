@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="fr-ca">
+<title>Mariage de John et Ariane</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="../img/heart.png" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.css' rel='stylesheet' />
+
+<style>
+    body, html {
+        height: 100%;
+        font-family: "Inconsolata", sans-serif;
+    }
+
+    .bgimg {
+        background-position: center;
+        background-size: cover;
+        background-image: url("../img/janda.jpg");
+        min-height: 75%;
+    }
+
+    .menu {
+        display: none;
+    }
+    a:link {
+    color: dodgerblue;
+    }
+    a:visited {
+        color:blueviolet;
+    } 
+    a:hover {
+        color: red;
+    }
+    .marker {
+        background-image: url('../img/leaf.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .mapboxgl-popup {
+        max-width: 125px;
+    }
+    .mapboxgl-popup-content {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .pop {
+        margin-bottom:0;
+        margin-top:0;
+    }
+
+</style>
+<body>
+
+    <!-- Links (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-row w3-padding w3-black">
+            <div class="w3-col s1">&nbsp;</div>
+            <div class="w3-col s2">
+                <a href="#" class="w3-button w3-block w3-black">ACCUEIL</a>
+            </div>
+            <div class="w3-col s2">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeIOfqth-km0nOm__lHSla5POeKzTRhBJtEkEqk91xJBPTcAw/viewform?usp=sf_link" target="_blank" class="w3-button w3-block w3-black">RSVP</a>
+            </div>
+            <div class="w3-col s2">
+                <a href="#where" class="w3-button w3-block w3-black">LIEU</a>
+            </div>
+            <div class="w3-col s2">
+                <a href="#accomodation" class="w3-button w3-block w3-black">HÉBERGEMENT</a>
+            </div>
+            <div class="w3-col s2">
+                <a href="#registry" class="w3-button w3-block w3-black">REGISTRE DES CADEAUX</a>
+            </div>
+            <div class="w3-col s1">
+                <a href="../index.html" class="w3-button w3-block w3-black" style="padding-right:0;font-size:10px"><img src="../img/usa.png" style="width:100%;max-width:35px" > EN</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header with image -->
+    <header class="bgimg w3-display-container" id="home">
+        <div class="w3-display-middle w3-center">
+            <span class="w3-text-white" style="font-size:80px">John &hearts; Ariane</span>
+            <br>
+            <span class="w3-text-white" style="font-size:40px">16 juin 2018</span>
+        </div>
+    </header>
+
+    <!-- Add a background color and large text to the whole page -->
+    <div id="main" class="w3-large" style="background-color:#F7F5F2;color:#363534">
+
+        <!-- About Container -->
+        <div class="w3-container" id="about">
+            <div class="w3-content" style="max-width:700px">
+                <br><br>
+                <center>Salut la famille et les ami(e)s!</center>
+                <p>Nous allons nous marier à Eastman en juin prochain et nous sommes très ravis de partager cette journée spéciale avec chacun d'entre vous! Le mariage prendra place à la cabane à sucre Haut Bois Normand. On aimerait vous réserver pour cette journée donc veuillez <a href="https://docs.google.com/forms/d/e/1FAIpQLSeIOfqth-km0nOm__lHSla5POeKzTRhBJtEkEqk91xJBPTcAw/viewform?usp=sf_link" target="_blank">RSVP</a> avant le 15 janvier 2018.</p>
+                <p style="margin-bottom:0em"><strong>Date:</strong> 16 juin 2018</p>
+                <p style="margin-top:0em"><strong>Heure:</strong> À déterminer</p>
+                <p>La cérémonie se déroulera à l'extérieur à ciel ouvert. Donc s'il vous plaît apportez un parapluie juste au cas où il pleuve.</p>
+                <img src="../img/dive.jpg" style="width:100%;max-width:1000px" class="w3-margin-top">
+            </div>
+        </div>
+
+        <!-- Where Container -->
+        <div class="w3-container" id="where" style="padding-bottom:32px;">
+            <div class="w3-content" style="max-width:700px">
+                <h5 class="w3-center w3-padding-24"><span class="w3-tag w3-wide" style="margin-top:24px">LIEU</span></h5>
+                <p style="margin-bottom:0em"><a href="http://hautboisnormand.ca/" target="_blank">Haut Bois Normand</a></p>
+                <p style="margin-top:0em">426 Chemin George Bonnallie, Eastman, Québec J0E 1P0</p>
+                <img src="../img/hautboisnormand.jpg" style="width:100%;max-width:1000px" class="w3-margin-top">
+                <p>Haut Bois Normand est une cabane à sucre avec tout le charme d'antan!</p>
+                <div id="map" style="width:100%;height:400px;"></div>
+            </div>
+        </div>
+
+        <!-- Accomodation Container -->
+        <div class="w3-container" id="accomodation" style="padding-bottom:32px;">
+            <div class="w3-content" style="max-width:700px">
+                <h5 class="w3-center w3-padding-24"><span class="w3-tag w3-wide" style="margin-top:24px">HÉBERGEMENT</span></h5>
+                <p>Voici quelques options pour l'hébergement:</p>
+                <p><a href="http://hautboisnormand.ca/en/accomodation/#Auberge" target="_blank">Auberge Haut Bois Normand</a></p>
+                <p>L'auberge au complet est réservée la soirée du mariage. Cette option d'hébergement sera idéalement pour des personnes qui ont l'intention de rester tard pour faire le party. Ariane et John vont coordonner les réservations pour cette auberge de 32 lits. Veuillez contacter directement Ariane ou John si vous êtes intéressé(es) à y dormir. C'est ~30$ par personne.</p>
+                <p><a href="https://levertendre.com/en/" target="_blank">Eco Chalets Le Vertendre</a></p>
+                <img src="../img/villa.jpg" style="width:100%;max-width:310px" class="w3-margin-top">
+                <p>Ces jolis chalets écologiques sont à 2,5 km de Haut Bois Normand. Chaque chalet héberge entre 4 et 8 personnes. Notez qu'il est requis de réserver deux nuits, et que ce n'est pas tous les chalets qui ont un accès routier. Veuillez les contacter le plus tôt possible si vous êtes intéressé(es) à y loger, car on s'attend à se qu'ils soient bien populaires pendant l'été.</p>
+                <p><a href="http://www.motelduvillage.com/" target="_blank">Motel Du Village</a></p>
+                <p>Un motel modeste à 5 km. Nous allons sous peu bloquer une portion du motel pour assurer des places. Vous êtes tout de même bienvenu(es) de réserver avant nous autres!</p>
+                <p>D'autres options à proximité:<br>
+                <a href="http://www.cottagesdulacorford.com/index.php?lang=en" target="_blank">Cottages Du Lac Orford</a><br>
+                <a href="https://www.gitelamarmotte.com/" target="_blank">Gite La Marmotte B+B</a><br>
+                <a href="http://www.arkadiaeastman.com/index_en.html" target="_blank">Arkadia Eastman B+B</a><br>
+                <a href="http://aubergedumontorford.com/en/" target="_blank">Auberge Du Mont Orford</a>
+                <br><a href="http://www.spa-eastman.com/en/eastman/the-experience/pavilions-and-rooms/" target="_blank">Spa Eastman ($$$)</a>
+                <br>De nombreux <a href="https://www.google.ca/search?safe=off&tbm=lcl&ei=1v8RWv_xHJbujwPJlrXoBg&q=Eastman%2C+QC+campground&oq=Eastman%2C+QC+campground&gs_l=psy-ab.3..33i160k1.313482.321034.0.321225.30.26.4.0.0.0.131.2079.19j7.26.0....0...1.1.64.psy-ab..0.30.2107...0j35i39k1j0i67k1j0i131k1j0i10k1j0i10i46k1j46i10k1j0i22i30k1j33i21k1.0.LaCknsR3gFg#rlfi=hd:;si:;mv:!1m3!1d173953.53595633476!2d-72.26503615!3d45.314439449999995!2m3!1f0!2f0!3f0!3m2!1i398!2i372!4f13.1;tbs:lrf:!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1" target="_blank">terrains de camping</a> dans la région
+                <br>De nombreux hotels à <a href="https://goo.gl/maps/xYcUHtXjsj12" target="_blank">Magog, QC</a> (à 20 minutes de route)</p>
+                
+            </div>
+        </div>
+
+        <!-- Registry Container -->
+        <div class="w3-container" id="registry" style="padding-bottom:32px;">
+            <div class="w3-content" style="max-width:700px">
+                <h5 class="w3-center w3-padding-24"><span class="w3-tag w3-wide">REGISTRE DES CADEAUX</span></h5>
+                <p>Il n'y a pas de registre des cadeaux! Si vous voulez tout de même nous offrir quelque chose, un cadeau monétaire serait le plus désiré. Nous prenons l'avion pour retourner à Vancouver après le mariage et il ne sera pas possible pour nous de rapporter des grands cadeaux.</p>
+            </div>
+        </div>
+
+        <!-- End page content -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-center w3-dark-grey w3-padding-48 w3-large">
+        <p>John &hearts; Ariane</p>
+    </footer>
+
+    <!-- Add Mapbox map -->
+    <script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiamNyaXN0aWEiLCJhIjoiQmFielRYTSJ9.gqekTOIsirCI5WZrmx-3Gw';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [-72.275654, 45.337794],
+    zoom: 6.5
+});
+
+var geojson = {
+    type: 'FeatureCollection',
+    features: [{
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-72.275654, 45.337794]
+        },
+        properties: {
+            title: 'Haut Bois Normand',
+            description: 'Eastman, QC'
+        }
+    }]
+};
+
+// add markers to map
+geojson.features.forEach(function (marker) {
+
+    // create a HTML element for each feature
+    var el = document.createElement('div');
+    el.className = 'marker';
+
+    // make a marker for each feature and add to the map
+    new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 25, closeButton: false})
+        .setHTML('<p class="pop">' + marker.properties.title + '</p><p class="w3-large pop">&hearts;</p><p class="pop">' + marker.properties.description + '</p>'))
+    .addTo(map);
+});
+
+// attemping to get popup to open automatically
+//pt = map.project([-72.275654, 45.337794]);
+//var ll = new mapboxgl.LngLat(-72.275654, 45.337794);
+//console.log(ll);
+//map.fire("click", { lngLat: ll});
+
+map.addControl(new mapboxgl.NavigationControl());
+
+
+    </script>
+
+</body>
+</html>
