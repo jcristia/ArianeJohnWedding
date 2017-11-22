@@ -1,1 +1,5 @@
-<a href="https://jcristia.github.io/ArianeJohnWedding/" target="_blank">Ariane and John's wedding</a>
+English:
+https://jcristia.github.io/ArianeJohnWedding/
+
+French:
+https://jcristia.github.io/ArianeJohnWedding/fr.html
